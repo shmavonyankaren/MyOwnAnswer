@@ -77,7 +77,7 @@ const handleSubmit = async (e) =>{
 
     loader(messageDiv);
 
-    const response = await fetch("http://localhost:5000", {
+    const response = await fetch("https://myownanswers.onrender.com", {
                         method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const handleSubmit = async (e) =>{
                             body:JSON.stringify({
                                 prompt: data.get("prompt")
                             })
-                     });
+                     }); 
 
     clearInterval(loadInterval);
     messageDiv.innerHTML = "";
