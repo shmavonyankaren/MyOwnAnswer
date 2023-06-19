@@ -11,7 +11,7 @@ function loader(element) {
 
     loadInterval = setInterval(() => {
         element.textContent += ".";
-
+        
         if(element.textContent === "....") {
             element.textContent = "";
         }
@@ -44,7 +44,7 @@ function chatStripe(isAi, value, uniqueId) {
         ` 
             <div class="wrapper ${isAi && "ai"}">
                 <div class="chat">
-                    <div className="profile">
+                    <div class="profile">
                         <img 
                             src="${isAi ? bot : user}"
                             alt="${isAi ? 'bot' : 'user'}"    
@@ -59,7 +59,7 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
-const handleSubmit = async (e) =>{
+const handleSubmit = async(e) =>{
     e.preventDefault();
 
     const data = new FormData(form);
@@ -77,7 +77,7 @@ const handleSubmit = async (e) =>{
 
     loader(messageDiv);
 
-    const response = await fetch("https://myownanswers.onrender.com", {
+    const response = await fetch("http://localhost:5000", {
                         method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const handleSubmit = async (e) =>{
                             body:JSON.stringify({
                                 prompt: data.get("prompt")
                             })
-                     }); 
+                     });
 
     clearInterval(loadInterval);
     messageDiv.innerHTML = "";
@@ -109,4 +109,4 @@ form.addEventListener("keyup", (e) =>{
     if(e.keyCode === 13) {
         handleSubmit(e);
     }
-});   
+});
